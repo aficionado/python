@@ -93,19 +93,19 @@ class MultiModel(object):
 
     """
 
-    def __init__(self, models):
+    def __init__(self, models, api=None):
         self.models = []
         if isinstance(models, list):
             for model in models:
-                self.models.append(Model(model))
+                self.models.append(Model(model, api=api))
         else:
-            self.models.append(Model(models))
+            self.models.append(Model(models, api=api))
 
     def list_models(self):
         """Lists all the model/ids that compound the multi model.
 
         """
-        return [model['resource'] for model in self.models]
+        return [model.resource() for model in self.models]
 
     def predict(self, input_data, by_name=True, method=PLURALITY_CODE,
                 with_confidence=False):
@@ -120,6 +120,13 @@ class MultiModel(object):
                   PROBABILITY_CODE
         """
 
+        votes = self.generate_votes(input_data, by_name=by_name)
+        return votes.combine(method=method, with_confidence=with_confidence)
+
+    def generate_votes(self, input_data, by_name=True):
+        """ Generates a MultiVote object that contains the predictions
+            made by each of the models.
+        """
         votes = MultiVote([])
         for order in range(0, len(self.models)):
             model = self.models[order]
@@ -129,8 +136,7 @@ class MultiModel(object):
             prediction_row = [prediction, confidence, order,
                               distribution, instances]
             votes.append_row(prediction_row)
-
-        return votes.combine(method=method, with_confidence=with_confidence)
+        return votes
 
     def batch_predict(self, input_data_list, output_file_path,
                       by_name=True, reuse=False):

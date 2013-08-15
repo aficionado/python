@@ -3,14 +3,49 @@
 History
 -------
 
-0.5.2 (2012-03-03)
+0.7.3 (2013-08-09)
+~~~~~~~~~~~~~~~~~~
+
+- Adds fields method to retrieve only preferred fields
+- Fixes error message when no valid resource id is provided in check_resource
+
+0.7.2 (2013-07-04)
+~~~~~~~~~~~~~~~~~~
+
+- Fixes check_resource method that was not using query-string data
+- Add list of models as argument in Ensemble constructor
+- MultiModel has BigML connection as a new optional argument
+
+0.7.1 (2013-06-19)
+~~~~~~~~~~~~~~~~~~
+
+- Fixes Multimodel list_models method
+- Fixes check_resource method for predictions
+- Adds local configuration environment variable BIGML_DOMAIN replacing
+  BIGML_URL and BIGML_DEV_URL
+- Refactors Ensemble and Model's predict method
+
+0.7.0 (2013-05-01)
+~~~~~~~~~~~~~~~~~~
+
+- Adds splits in datasets to generate new datasets
+- Adds evaluations for ensembles
+
+0.6.0 (2013-04-27)
+~~~~~~~~~~~~~~~~~~
+
+- REST API methods for model ensembles
+- New method returning the leaves of tree models
+- Improved error handling in GET methods
+
+0.5.2 (2013-03-03)
 ~~~~~~~~~~~~~~~~~~
 
 - Adds combined confidence to combined predictions
 - Fixes get_status for resources that have no status info
-- Fixes bug: public datasets, that should be downloadable, weren't.
+- Fixes bug: public datasets, that should be downloadable, weren't
 
-0.5.1 (2012-02-12)
+0.5.1 (2013-02-12)
 ~~~~~~~~~~~~~~~~~~
 
 - Fixes bug: no status info in public models, now shows FINISHED status code
@@ -18,7 +53,7 @@ History
 - Refactoring Fields pair method and Model predict method to increase
 - Adds some more locale aliases
 
-0.5.0 (2012-01-16)
+0.5.0 (2013-01-16)
 ~~~~~~~~~~~~~~~~~~
 
 - Adds evaluation api functions
