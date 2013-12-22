@@ -457,14 +457,15 @@ def count(listing):
     """Count of existing resources
 
     """
-    if 'query_total' in listing:
-        return listing['query_total']
+    if 'meta' in listing and 'query_total' in listing['meta']:
+        return listing['meta']['query_total']
 
 
-def ok(resource):
+def ok(resource, api):
     """Waits until the resource is finished and returns True on success
 
     """
+    GET_RESOURCE = resource_getters(api)
     if http_ok(resource):
         resource_type = get_resource_type(resource)
         check_resource(resource, GET_RESOURCE[resource_type])
