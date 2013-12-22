@@ -468,10 +468,10 @@ def ok(resource, api):
     GET_RESOURCE = resource_getters(api)
     if http_ok(resource):
         resource_type = get_resource_type(resource)
-        check_resource(resource, GET_RESOURCE[resource_type])
+        resource = check_resource(resource, GET_RESOURCE[resource_type])
         return True
     else:
-        log_message("The resource couldn't be created: %s"  %
+        LOGGER.error("The resource couldn't be created: %s"  %
             resource['error'])
 
 
